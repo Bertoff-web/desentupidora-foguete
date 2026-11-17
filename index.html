@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema simples de controle financeiro da Desentupidora Foguete.">
+  <title>Desentupidora Foguete | Controle financeiro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">DF</div>
+      <div><strong>Desentupidora Foguete</strong><span>Controle financeiro</span></div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-button" id="fontToggle" type="button" aria-pressed="false" title="Aumentar tamanho do texto">A+</button>
+      <button class="icon-button" id="contrastToggle" type="button" aria-pressed="false" title="Ativar alto contraste">◐</button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <p class="nav-label">MENU PRINCIPAL</p>
+      <button class="nav-item active" data-view="inicio" type="button"><span aria-hidden="true">⌂</span> Visão geral</button>
+      <button class="nav-item" data-view="lancamentos" type="button"><span aria-hidden="true">↕</span> Lançamentos</button>
+      <button class="nav-item" data-view="resumo" type="button"><span aria-hidden="true">▤</span> Resumo financeiro</button>
+      <div class="sidebar-note"><strong>Organize seu caixa.</strong><p>Registre entradas e despesas para acompanhar a saúde financeira da empresa.</p></div>
+      <p class="demo-note">Protótipo acadêmico • Dados salvos neste navegador</p>
+    </aside>
+
+    <main id="conteudo" class="main-content">
+      <section class="view active" id="view-inicio" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div><p class="eyebrow">PAINEL DE CONTROLE</p><h1 id="page-title">Visão geral</h1><p class="muted">Acompanhe as movimentações financeiras da empresa.</p></div>
+          <span class="date-chip" id="todayLabel"></span>
+        </div>
+        <div class="summary-grid">
+          <article class="metric-card"><div class="metric-top"><span>Total de entradas</span><span class="metric-icon green">↗</span></div><strong id="homeIncome">R$ 0,00</strong><small>Recebimentos registrados</small></article>
+          <article class="metric-card"><div class="metric-top"><span>Total de despesas</span><span class="metric-icon red">↘</span></div><strong id="homeExpense">R$ 0,00</strong><small>Custos e despesas registrados</small></article>
+          <article class="metric-card balance-card"><div class="metric-top"><span>Saldo atual</span><span class="metric-icon blue">＝</span></div><strong id="homeBalance">R$ 0,00</strong><small>Entradas menos despesas</small></article>
+        </div>
+        <div class="content-card">
+          <div class="section-heading"><div><h2>Ações rápidas</h2><p class="muted">Registre uma movimentação financeira.</p></div></div>
+          <div class="quick-actions">
+            <button class="action-tile" type="button" data-open-form="entrada"><span class="action-symbol green">＋</span><span><strong>Adicionar entrada</strong><small>Registrar um recebimento</small></span><span class="tile-arrow">→</span></button>
+            <button class="action-tile" type="button" data-open-form="despesa"><span class="action-symbol red">－</span><span><strong>Adicionar despesa</strong><small>Registrar um custo da empresa</small></span><span class="tile-arrow">→</span></button>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="section-heading"><div><h2>Movimentações recentes</h2><p class="muted">Últimos registros adicionados.</p></div><button class="text-button" type="button" data-go="lancamentos">Ver todos →</button></div>
+          <div id="recentList" class="recent-list"><p class="empty-state">Nenhuma movimentação registrada ainda.</p></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-lancamentos" aria-labelledby="launch-title">
+        <div class="page-heading"><div><p class="eyebrow">MOVIMENTAÇÃO</p><h1 id="launch-title">Lançamentos</h1><p class="muted">Cadastre e consulte entradas e despesas.</p></div></div>
+        <div class="content-card">
+          <div class="section-heading"><div><h2>Movimentações</h2><p class="muted">Os registros ficam salvos neste navegador.</p></div><div class="button-group"><button class="button button-outline" data-open-form="despesa" type="button">＋ Despesa</button><button class="button button-primary" data-open-form="entrada" type="button">＋ Entrada</button></div></div>
+          <div class="filters">
+            <label>Tipo
+              <select id="typeFilter"><option value="todos">Todos</option><option value="entrada">Entradas</option><option value="despesa">Despesas</option></select>
+            </label>
+            <label>Buscar descrição
+              <input id="searchFilter" type="search" placeholder="Ex.: combustível">
+            </label>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">Descrição</th><th scope="col">Categoria</th><th scope="col">Data</th><th scope="col">Tipo</th><th scope="col" class="align-right">Valor</th><th scope="col">Ação</th></tr></thead>
+              <tbody id="transactionRows"><tr><td colspan="6" class="empty-state">Nenhum lançamento cadastrado.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-resumo" aria-labelledby="summary-title">
+        <div class="page-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h1 id="summary-title">Resumo financeiro</h1><p class="muted">Entenda o resultado das movimentações registradas.</p></div></div>
+        <div class="summary-grid">
+          <article class="metric-card"><div class="metric-top"><span>Entradas</span><span class="metric-icon green">↗</span></div><strong id="summaryIncome">R$ 0,00</strong><small>Soma dos recebimentos</small></article>
+          <article class="metric-card"><div class="metric-top"><span>Despesas</span><span class="metric-icon red">↘</span></div><strong id="summaryExpense">R$ 0,00</strong><small>Soma dos custos</small></article>
+          <article class="metric-card balance-card"><div class="metric-top"><span>Saldo</span><span class="metric-icon blue">＝</span></div><strong id="summaryBalance">R$ 0,00</strong><small>Resultado financeiro</small></article>
+        </div>
+        <div class="content-card">
+          <div class="section-heading"><div><h2>Resultado do período</h2><p class="muted">Cálculo baseado em todos os lançamentos cadastrados.</p></div></div>
+          <div class="result-line"><span>Total recebido</span><strong class="positive" id="resultIncome">R$ 0,00</strong></div>
+          <div class="result-line"><span>Total de despesas</span><strong class="negative" id="resultExpense">R$ 0,00</strong></div>
+          <div class="result-line result-total"><span>Saldo final</span><strong id="resultBalance">R$ 0,00</strong></div>
+          <p class="notice" id="balanceMessage" role="status">Cadastre movimentações para visualizar seu resultado financeiro.</p>
+        </div>
+        <div class="content-card">
+          <div class="section-heading"><div><h2>Acessibilidade</h2><p class="muted">Ajuste a apresentação para facilitar a leitura.</p></div></div>
+          <p class="access-description">Use os controles no topo da página para aumentar o texto ou ativar o alto contraste. As configurações podem ser ligadas e desligadas a qualquer momento.</p>
+          <div class="access-controls"><button class="button button-outline" id="fontToggle2" type="button">Aumentar/reduzir texto</button><button class="button button-outline" id="contrastToggle2" type="button">Ativar/desativar alto contraste</button></div>
+        </div>
+      </section>
+      <footer class="footer">Desentupidora Foguete • MVP demonstrativo • Não substitui um sistema contábil.</footer>
+    </main>
+  </div>
+
+  <dialog id="transactionDialog" class="modal">
+    <form id="transactionForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow" id="formEyebrow">NOVO REGISTRO</p><h2 id="formTitle">Adicionar entrada</h2></div><button class="close-button" type="button" id="closeDialog" aria-label="Fechar">×</button></div>
+      <input type="hidden" id="transactionType" value="entrada">
+      <label for="description">Descrição</label><input id="description" name="description" maxlength="70" required placeholder="Ex.: Desentupimento de pia">
+      <div class="form-row"><div><label for="amount">Valor (R$)</label><input id="amount" name="amount" type="number" min="0.01" step="0.01" required placeholder="250,00"></div><div><label for="date">Data</label><input id="date" name="date" type="date" required></div></div>
+      <label for="category">Categoria</label><select id="category" name="category" required></select>
+      <label for="payment">Forma de pagamento (opcional)</label><select id="payment" name="payment"><option value="">Não informado</option><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>Transferência</option><option>Boleto</option></select>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="modal-actions"><button class="button button-outline" type="button" id="cancelDialog">Cancelar</button><button class="button button-primary" type="submit">Salvar lançamento</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
