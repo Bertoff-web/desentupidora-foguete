@@ -42,3 +42,5 @@ Este é um MVP demonstrativo. Os dados ficam armazenados somente no navegador e 
 ## Tecnologias
 
 HTML5, CSS3 e JavaScript puro.
+
+Site publicado em: https://bertoff-web.github.io/desentupidora-foguete/
